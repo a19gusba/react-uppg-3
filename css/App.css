@@ -1,0 +1,11 @@
+h1.title {
+  color: var(--clr-text);
+}
+
+.table-chat-container{
+  width: 87%;
+  margin: 20px auto;
+  display: flex;
+  justify-content: space-between;
+  flex-wrap: wrap;
+}

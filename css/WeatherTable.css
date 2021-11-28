@@ -1,0 +1,44 @@
+.weather-table {
+    max-width: 1000px;
+    height: auto;
+    border: 1px solid black;
+    background-color: rgb(238, 238, 238);
+}
+
+.weather-days-container {
+    position: relative;
+}
+
+table {
+    position: relative;
+    width: 100%;
+    table-layout: fixed;
+    border-collapse: collapse;
+}
+
+th {
+    text-align: left;
+    font-weight: normal;
+}
+
+.climate-code-container {
+    display: flex;
+    align-items: center;
+}
+
+.climate-code-color {
+    width: 20px;
+    height: 20px;
+    margin-right: 5px;
+    background-color: black;
+    border-radius: 50%;
+}
+
+.header-wrapper {
+    padding: 5px 15px;
+    margin-bottom: 10px;
+}
+
+.header-wrapper>* {
+    margin: 10px 0px;
+}

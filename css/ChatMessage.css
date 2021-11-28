@@ -1,0 +1,68 @@
+:root {
+    --clr-grey: #555555;
+    --clr-grey-light: #8f8f8f;
+    --like-btn-width: 110px;
+    --like-btn-height: 40px
+}
+
+.chat-message {
+    border-bottom: 1px solid var(--clr-grey-light);
+    padding: 15px 15px;
+}
+
+.user-info {
+    display: flex;
+    align-items: center;
+    color: var(--clr-grey);
+    font-size: 16px;
+}
+
+.username {
+    font-weight: bold;
+    color: black;
+    font-size: 18px;
+}
+
+.message {
+    margin: 10px 0px 15px 0px;
+}
+
+.like-btn {
+    position: relative;
+    width: var(--like-btn-width);
+    height: var(--like-btn-height);
+    border: 1px solid var(--clr-grey-light);
+    display: flex;
+}
+
+.like-icon-container {
+    padding: 5px;
+    position: relative;
+    width: var(--like-btn-height);
+    height: var(--like-btn-height);
+    cursor: pointer;
+    border-right: 1px solid var(--clr-grey-light);
+}
+
+.like-icon {
+    width: 100%;
+    height: 100%;
+    background-image: url("../images/like.png");
+    background-size: contain;
+    background-repeat: no-repeat;
+    background-position: center center;
+}
+
+.like-amount {
+    flex: 1;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    color: var(--clr-grey);
+}
+
+.date-info{
+    margin-top: 10px;
+    font-size: 14px;
+    color: var(--clr-grey);
+}

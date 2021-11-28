@@ -1,0 +1,29 @@
+.chat-window {
+    position: relative;
+    width: 500px;
+    height: 800px;
+    border: 1px solid black;
+    overflow-y: scroll;
+    background-color: #fff;
+}
+
+.chat-window>h1 {}
+
+.chat-hide-btn {
+    display: inline-block;
+    padding: 10px 20px;
+    border: 1px solid black;
+    cursor: pointer;
+    user-select: none;
+}
+
+.chat-header-container {
+    display: flex;
+    justify-content: space-between;
+    border-bottom: 1px solid #000;
+    padding: 15px 10px;
+}
+
+.hide {
+    visibility: hidden;
+}

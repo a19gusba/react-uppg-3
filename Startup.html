@@ -1,0 +1,127 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+  <title>React Example</title>
+  <link rel="stylesheet" href="css/weatherApp.css">
+  <link rel="stylesheet" href="css/App.css">
+  <link rel="stylesheet" href="css/index.css">
+  <link rel="stylesheet" href="css/ChatMessage.css">
+  <link rel="stylesheet" href="css/ChatWindow.css">
+  <link rel="stylesheet" href="css/WeatherDay.css">
+  <link rel="stylesheet" href="css/WeatherTable.css">
+</head>
+
+<body>
+  <script src="https://unpkg.com/babel-standalone@6/babel.min.js"></script>
+  <script src="https://unpkg.com/react@16/umd/react.development.js" crossorigin></script>
+  <script src="https://unpkg.com/react-dom@16/umd/react-dom.development.js" crossorigin></script>
+
+
+  <h1 className="title">Weather app</h1>
+  <form action="Startup.html" method="get">
+    <div class="form-group search">
+      <input type="text" class="input" placeholder="search" name="ort">
+      <button type="submit"><img src='magnify.svg'></button>
+    </div>
+  </form>
+
+  <div id="content"></div>
+
+  <script type="text/babel" src='App.js'></script>
+
+  <!-- Weather Table -->
+  <script type="text/babel" src='WeatherTable.js'></script>
+  <script type="text/babel" src="WeatherTableBody.js"></script>
+  <script type="text/babel" src="WeatherDay.js"></script>
+
+  <!-- Chat Window -->
+  <script type="text/babel" src='ChatWindow.js'></script>
+  <script type="text/babel" src='ChatMessages.js'></script>
+  <script type="text/babel" src='ChatMessage.js'></script>
+
+
+  <script type="text/babel">
+
+
+    async function getData() {
+
+      var allData = {}
+      const params = {
+        ort: "Arjeplog"
+      }
+      const params2 = {
+        ort: "Arjeplog",
+        days: 2
+      }
+
+      // Promise, climate code data
+      let pClimateCodes = new Promise(async (resolve, reject) => {
+        const response = await fetch("php/Climatecodes.php", {
+          method: 'POST',
+          headers: { 'Content-Type': 'application/json' }
+        })
+          .then((response) => response.json()).then(data => {
+            resolve(data)
+          });
+      })
+
+      // Promise, ort
+      let pOrt = new Promise(async (resolve, reject) => {
+        const response = await fetch("php/Ort.php", {
+          method: 'POST',
+          headers: { 'Content-Type': 'application/json' },
+          body: JSON.stringify(params)
+        })
+          .then((response) => response.json()).then(data => {
+            resolve(data)
+          });
+      })
+
+
+      // Promise, forecast
+      let pForecast = new Promise(async (resolve, reject) => {
+        const response = await fetch("php/Forecast.php", {
+          method: 'POST',
+          headers: { 'Content-Type': 'application/json' },
+          body: JSON.stringify(params2)
+        })
+          .then((response) => response.json()).then(data => {
+            resolve(data)
+          });
+      })
+
+
+      // Promise, comments
+      let pComments = new Promise(async (resolve, reject) => {
+        const response = await fetch("php/Comments.php", {
+          method: 'POST',
+          headers: { 'Content-Type': 'application/json' },
+          body: JSON.stringify(params)
+        })
+          .then((response) => response.json()).then(data => {
+            resolve(data)
+          });
+      })
+
+      Promise.all([pClimateCodes, pOrt, pForecast, pComments])
+        .then((data) => {
+          ReactDOM.render(
+            <App climateCode={data[0]} ort={data[1]} forecast={data[2]} comments={data[3]} />,
+            document.getElementById('content')
+          );
+        })
+    }
+
+    getData();
+
+    // React since react V4 does not read query parameters so we read query parameter directly
+    const urlParams = new URLSearchParams(window.location.search);
+    const ort = urlParams.get('ort');
+
+    if (ort != null) alert(ort);
+  </script>
+
+</body>
+
+</html>
