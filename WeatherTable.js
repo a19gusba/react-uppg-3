@@ -1,6 +1,5 @@
 function WeatherTable({ ort, climateCode, forecast }) {
-    console.log(ort.geodata)
-
+    const geodata = JSON.parse(ort.geolocation)
     return (
         <div className="weather-table">
             <div className="header-wrapper">
@@ -9,7 +8,7 @@ function WeatherTable({ ort, climateCode, forecast }) {
                 <span>Postal code: {ort.postalcode}</span>
                 <div>
                     <div className="bold">Geodata: </div>
-                    <span>LATITUDE: {ort.geodata.LATITUDE}, LONGITUDE: {ort.geodata.LONGITUDE}, ALTITUDE: {ort.geodata.ALTITUDE}</span>
+                    <span>LATITUDE: {geodata.LATITUDE}, LONGITUDE: {geodata.LONGITUDE}, ALTITUDE: {geodata.ALTITUDE}</span>
                 </div>
                 <div>
                     <span className="bold">Description: </span>

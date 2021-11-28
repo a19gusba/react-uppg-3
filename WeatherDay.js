@@ -1,5 +1,6 @@
 function WeatherDay({ data }) {
 
+    const auxdata = JSON.parse(data.auxdata)
     function getForecastImage(FNAME) {
         if (FNAME == "Partly cloudy")
             return "cloud-sun"
@@ -14,7 +15,7 @@ function WeatherDay({ data }) {
     return (
         <tr className="weather-day-container">
             <td className="weather-type">
-                <img src={"images/" + getForecastImage(data.forecast.FNAME) + ".png"} alt="" className="weather-icon" />
+                <img src={"images/" + getForecastImage(auxdata.FNAME) + ".png"} alt="" className="weather-icon" />
             </td>
             <td>
                 <div className="">{data.periodno}</div>
@@ -28,20 +29,20 @@ function WeatherDay({ data }) {
                 <div className="flex">
                     <img src="" alt="" className="temperature-icon" />
                     <div>
-                        <div className="max-temperature bold">{data.forecast.TVALUE}°</div>
+                        <div className="max-temperature bold">{auxdata.TVALUE}°</div>
                     </div>
                 </div>
             </td>
             <td className="weather-rain">
                 <div className="flex">
                     <img src="" alt="" className="rain-icon" />
-                    <div className="bold">{data.forecast.RVALUE} {data.forecast.RUNIT}</div>
+                    <div className="bold">{auxdata.RVALUE} {auxdata.RUNIT}</div>
                 </div>
             </td>
             <td className="weather-wind">
                 <div className="flex">
                     <img src="" alt="" className="wind-icon" />
-                    <div className="bold">{data.forecast.MPS} m/s</div>
+                    <div className="bold">{auxdata.MPS} m/s</div>
                 </div>
             </td>
         </tr>

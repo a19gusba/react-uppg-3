@@ -57,8 +57,8 @@
 
       // Promise, climate code data
       let pClimateCodes = new Promise(async (resolve, reject) => {
-        const response = await fetch("php/Climatecodes.php", {
-          method: 'POST',
+        const response = await fetch("http://localhost:5000/climatecodes", {
+          method: 'GET',
           headers: { 'Content-Type': 'application/json' }
         })
           .then((response) => response.json()).then(data => {
@@ -68,10 +68,9 @@
 
       // Promise, ort
       let pOrt = new Promise(async (resolve, reject) => {
-        const response = await fetch("php/Ort.php", {
-          method: 'POST',
+        const response = await fetch(`http://localhost:5000/ort/${params.ort}`, {
+          method: 'GET',
           headers: { 'Content-Type': 'application/json' },
-          body: JSON.stringify(params)
         })
           .then((response) => response.json()).then(data => {
             resolve(data)
@@ -81,12 +80,13 @@
 
       // Promise, forecast
       let pForecast = new Promise(async (resolve, reject) => {
-        const response = await fetch("php/Forecast.php", {
-          method: 'POST',
+        const url = `http://localhost:5000/forecast/${params2.ort}/${params2.days}`
+        const response = await fetch(url, {
+          method: 'GET',
           headers: { 'Content-Type': 'application/json' },
-          body: JSON.stringify(params2)
         })
           .then((response) => response.json()).then(data => {
+            console.log(url)
             resolve(data)
           });
       })
@@ -94,10 +94,9 @@
 
       // Promise, comments
       let pComments = new Promise(async (resolve, reject) => {
-        const response = await fetch("php/Comments.php", {
-          method: 'POST',
+        const response = await fetch(`http://localhost:5000/comments/${params2.ort}`, {
+          method: 'GET',
           headers: { 'Content-Type': 'application/json' },
-          body: JSON.stringify(params)
         })
           .then((response) => response.json()).then(data => {
             resolve(data)
