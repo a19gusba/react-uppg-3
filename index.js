@@ -22,7 +22,9 @@ let db = new sqlite3.Database("./weather.db", (err) => {
     }
 })
 
+/* == WEATHER == */
 
+// Get forecast
 app.get("/forecast/:ort/:days", function (req, res) {
     var paramDays = parseInt(req.params.days)
     let fromdate = new Date("2020-06-09")
@@ -44,6 +46,7 @@ app.get("/forecast/:ort/:days", function (req, res) {
     })
 })
 
+// Get climatecodes
 app.get("/climatecodes", function (req, res) {
     let sql = `SELECT * FROM 'climatecodes'`
     db.all(sql, [], (err, row) => {
@@ -57,7 +60,7 @@ app.get("/climatecodes", function (req, res) {
     })
 })
 
-
+// Get ort
 app.get("/ort/:ort", function (req, res) {
     let sql = `SELECT * FROM info where name='${req.params.ort}'`
     db.all(sql, [], (err, row) => {
@@ -71,6 +74,10 @@ app.get("/ort/:ort", function (req, res) {
     })
 })
 
+
+/* == CHAT == */
+
+// Get comments
 app.get("/comments/:ort", function (req, res) {
     let sql = `SELECT *,comment.id as commentid,count(likes.comment) as nolikes FROM comment,user left outer join likes on likes.comment=comment.id where location='${req.params.ort}' and user.id=comment.author group by comment.id`
     db.all(sql, [], (err, row) => {
@@ -84,3 +91,26 @@ app.get("/comments/:ort", function (req, res) {
     })
 })
 
+
+/* == USER == */
+
+// Get users
+app.get("/user", function (req, res) {
+    let sql = `SELECT * FROM 'user'`
+    db.all(sql, [], (err, row) => {
+        if (err) {
+            throw err
+        }
+        else {
+            res.type("application/json")
+            res.status(200).send(row)
+        }
+    })
+})
+
+// Add a user
+app.get("/user/:id/:username/:email/:favlocation", function (req, res) {
+
+    let sql = `INSERT INTO user VALUES (${req.params.id}, '${req.params.username}', '${req.params.email}', '${req.params.favlocation}', null);`
+    db.run(sql)
+})

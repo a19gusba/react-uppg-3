@@ -2,14 +2,19 @@ function WeatherDay({ data }) {
 
     const auxdata = JSON.parse(data.auxdata)
     function getForecastImage(FNAME) {
-        if (FNAME == "Partly cloudy")
+
+        if (FNAME == "Partly cloudy" || FNAME == "Fair")
             return "cloud-sun"
-        else if (FNAME == "Rain Showers")
-            return "rain"
-        else if (FNAME == "Heavy rain")
+        else if (FNAME == "Rain Showers" || FNAME == "Heavy rain")
             return "rain"
         else if (FNAME == "Cloudy")
             return "cloud"
+        else if (FNAME == "Thunder")
+            return "thunder"
+        else if (FNAME == "Fog")
+            return "fog"
+        else
+            console.log(FNAME)
     }
 
     return (

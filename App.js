@@ -1,5 +1,5 @@
 function App({ ort, climateCode, forecast, comments }) {
-
+  console.log(comments)
   function getChatData() {
     var data = { show: "show" }
 

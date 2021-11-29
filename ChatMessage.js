@@ -3,7 +3,7 @@ function ChatMessage({ data }) {
         <div className="chat-message">
             <div className="user-info">
                 <div className="username">{data.username} </div>
-                <div className="email"> {data.email}</div>
+                <div className="email"> {data.email} </div>
                 <div className="email"> - id: {data.id}</div>
             </div>
             <div className="message">
